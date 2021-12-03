@@ -3,8 +3,7 @@
 class DayOne
   INPUT = File.join(File.dirname(__FILE__), '../inputs/one')
 
-  def initialize(part:, window:)
-    @part = part
+  def initialize(window:)
     @window = window
   end
 
@@ -15,12 +14,12 @@ class DayOne
       increases += 1 if window_sum(i) < window_sum(i + 1)
     end
 
-    puts "Part #{part} increases: #{increases}"
+    increases
   end
 
   private
 
-  attr_reader :window, :part
+  attr_reader :window
 
   def measurements
     @measurements ||= File.read(INPUT).split("\n").reject(&:empty?)
@@ -31,6 +30,6 @@ class DayOne
   end
 end
 
-puts "\n=== DAY ONE === \n"
-DayOne.new(part: 'one', window: 1).collect
-DayOne.new(part: 'two', window: 3).collect
+puts "\nDay 1"
+puts "├ Part one: #{DayOne.new(window: 1).collect}"
+puts "└ Part two: #{DayOne.new(window: 3).collect}"

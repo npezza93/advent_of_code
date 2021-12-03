@@ -1,12 +1,12 @@
 use std::fs;
 
 pub fn perform() {
-    println!("\n=== DAY ONE ===\n");
+    println!("\nDay 1");
 
     let measurements = measurements("/Users/nick/Documents/advent/inputs/one");
 
-    println!("Part one increases: {:?}", collect_increases(&measurements, 1));
-    println!("Part two increases: {:?}", collect_increases(&measurements, 3));
+    println!("├ Part one: {:?}", collect_increases(&measurements, 1));
+    println!("└ Part two: {:?}", collect_increases(&measurements, 3));
 }
 
 fn measurements(path: &str) -> Vec<String> {
