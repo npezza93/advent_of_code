@@ -60,4 +60,4 @@ end
 
 puts "\nDay 5"
 puts "├ Part one: #{overlapping_points(lines.reject(&:diagonal?))}"
-puts "├ Part two: #{overlapping_points(lines)}"
+puts "└ Part two: #{overlapping_points(lines)}"
