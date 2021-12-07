@@ -1,41 +1,24 @@
 # frozen_string_literal: true
 
-class Lanterfish
-  def initialize(days_until_birth)
-    @days_until_birth = days_until_birth
-  end
-
-  attr_accessor :days_until_birth
-
-  def new_day
-    if days_until_birth.zero?
-      self.days_until_birth = 6
-      [self, Lanterfish.new(8)]
-    else
-      self.days_until_birth -= 1
-      [self]
-    end
-  end
-end
-
 INPUT = File.join(File.dirname(__FILE__), '../inputs/six')
 
 def initial_fish
-  @initial_fish ||= File.read(INPUT).split(',').map do |days_until_birth|
-    Lanterfish.new(days_until_birth.to_i)
-  end
+  File.read(INPUT).strip.split(',').map(&:to_i).tally
 end
 
 def after_x_days(days)
-  fishes = [Lanterfish.new(3)]
+  school = initial_fish
 
   days.times do
-    fishes = fishes.each_with_object([]) do |fish, school|
-      school << fish.new_day
-    end.flatten
+    school = school.to_h { |remaining, count| [remaining - 1, count] }
+    school.default = 0
+
+    school[8], school[6] = school[-1], school[6] + school[-1]
+
+    school.delete(-1)
   end
 
-  fishes.count
+  school.values.sum
 end
 
 puts "\nDay 6"
